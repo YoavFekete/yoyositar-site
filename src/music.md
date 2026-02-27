@@ -5,7 +5,7 @@ description: Music releases and upcoming EP by YoYo Sitar.
 permalink: /music/index.html
 videoId: SRGkXtQMU0E
 ---
-## Music
+# Music
 
 Debut EP — 2026  
 Coming Soon!
