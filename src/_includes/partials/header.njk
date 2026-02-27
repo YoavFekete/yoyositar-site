@@ -1,0 +1,19 @@
+﻿<header class="header">
+  <nav class="nav">
+    <a href="/music/">Music</a>
+    {% for s in shows %}
+          <a href="{{ s.url }}">{{ s.title }}</a>
+    {% endfor %}
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="https://drive.google.com/drive/folders/1okhIQFjavOFf0ZoTv-CxDTQxbddhsLye"
+      target="_blank"
+      rel="noopener">
+      Press Kit
+    </a>
+  </nav>
+
+  <a class="site-logo" href="/" aria-label="YoYo Sitar — Home">
+    <img src="/assets/img/logo-black.png" alt="YoYo Sitar" width="160" height="160" />
+  </a>
+</header>

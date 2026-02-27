@@ -1,0 +1,6 @@
+﻿[
+  { "key": "solo", "title": "YoYo Sitar — Solo", "url": "/shows/solo/", "videoId": "VIDEO_ID" },
+  { "key": "afro-desi", "title": "Afro-Desi", "url": "/shows/afro-desi/", "videoId": "VIDEO_ID" },
+  { "key": "raga-voice", "title": "Raga Voice", "url": "/shows/raga-voice/", "videoId": "VIDEO_ID" },
+  { "key": "sound-journey", "title": "Sound Journey", "url": "/shows/sound-journey/", "videoId": "VIDEO_ID" }
+]

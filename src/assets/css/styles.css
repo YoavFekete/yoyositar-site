@@ -1,0 +1,211 @@
+﻿/* Sticky footer foundation */
+html, body{
+  height: 100%;
+}
+
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body{
+  margin: 0;
+  font-family:  'Noto Sans', sans-serif; 
+  background: #000;
+  color: #fff;
+}
+
+
+
+
+/* Make main expand to push footer down */
+main{
+  flex: 1;
+}
+
+.page { max-width: 1100px; margin: 0 0; padding: 32px 60px; }
+
+.page h1{
+  font-size: 36px;    /* Title */
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+
+.page p{
+  font-size: 18px;
+  line-height: 1.65;
+  margin: 0 0 16px;
+  max-width: 140ch;    /* Text */
+}
+/* Header & Footer layout */
+.header{
+  display: flex;
+  align-items: flex-start;   /* ← moves logo up */
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 40px;
+}
+
+.footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding:  20px 40px;
+}
+
+/* Nav */
+
+.nav{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;   /* distance between items */
+}
+
+.nav a, .nav-group > span{
+  color: #fff;                 /* important for visibility */
+  text-decoration: none;
+  font-size: 32px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.92;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav a:hover{ opacity: 1; }
+
+/* Logo: force it to the right and stable */
+.site-logo{
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-logo img{
+  width:200px;                 /* tune */
+  height: auto;
+  display: block;
+}
+
+/* Dropdown */
+.nav-group{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-group > span{
+  cursor: default;
+  user-select: none;
+}
+
+
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Footer social icons (your current issue) */
+.footer{
+  justify-content: center;   /* like the reference */
+  gap: 30px;   /* distance between icons */
+}
+
+.footer a{
+  display: inline-flex;      /* makes the click target sane */
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 200px;    /* distance from bottom */
+  opacity: 0.85;
+}
+
+.footer a:hover{ opacity: 1; }
+
+.footer img{
+  width: 34px;               /* without this, SVG might appear tiny/0 */
+  height: 34px;
+  display: block;
+  filter: invert(1);         /* because your icons are images, not currentColor */
+}
+
+/* Home hero background stays */
+body.home{
+  background-image: url('/assets/img/home.jpg');
+  background-size: cover;
+  background-position: right center ;
+  background-repeat: no-repeat;
+}
+
+
+body.home::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Mobile */
+@media (max-width: 600px){
+  .header{
+    padding: 14px 26px;    /* top dis ,  side dis */
+    gap: 16px;
+  }
+
+  .nav a, .nav-group > span{
+    font-size: 16px;
+  }
+
+  .site-logo img{
+    width: 130px;
+  }
+
+}
+
+
+
+body.contact .page{ max-width: 760px; }
+
+body.contact input,
+body.contact textarea{
+  width: 100%;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font: inherit;
+}
+
+body.contact textarea{ resize: vertical; }
+
+body.contact button{
+  background: #fff;
+  color: #000;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font: inherit;
+  cursor: pointer;
+}
+
+body.contact button:hover{ opacity: 0.92; }
