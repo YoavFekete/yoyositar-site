@@ -1,7 +1,7 @@
 ﻿---
 layout: layouts/base.njk
-title: Sound Journey
-description: Live sitar experience.
+title: Sound Journey | YoYo Sitar
+description: A participatory sitar-led sound experience blending improvisation, meditation, and storytelling. Designed for retreats, wellness events, and intimate gatherings.
 permalink: /shows/sound-journey/index.html
 videoId: 0LkJ4vXL2Nc
 ---

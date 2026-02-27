@@ -1,7 +1,7 @@
 ﻿---
 layout: layouts/base.njk
-title: YoYo Sitar — Solo
-description: Contemporary sitar performance.
+title: Solo | YoYo Sitar
+description: A contemporary sitar concert rooted in Indian raga and live improvisation — from deep stillness to driving rhythm. Flexible formats for venues and festivals.
 permalink: /shows/solo/index.html
 videoId: uSx-PIo0wfM
 ---

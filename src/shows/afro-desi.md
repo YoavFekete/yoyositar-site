@@ -1,7 +1,7 @@
 ﻿---
 layout: layouts/base.njk
-title: Afro-Desi
-description: African–Indian fusion project.
+title: Afro-Desi | YoYo Sitar
+description: African string traditions meet Indian raga in a groove-based, hypnotic live set. Improvised, rhythmic, and emotionally rich — duo to festival ensemble.
 permalink: /shows/afro-desi/index.html
 videoId: OIH_X2o5cec
 ---
