@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact — YoYo Sitar</title>
-  <meta name="description" content="Contact YoYo Sitar for bookings." />
+  <meta name="description" content="Contact YoYo Sitar." />
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,18 +37,34 @@
   </a>
 </header>
   <main class="page">
-    <h1>Contact</h1>
-<form name="contact" method="POST" data-netlify="true">
+    
+<h1>Contact</h1>
+
+<form name="contact"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      action="/contact/thanks/">
+
   <input type="hidden" name="form-name" value="contact" />
+  <input type="hidden" name="subject" value="New message from YoYoSitar.com" />
+
+  <p hidden>
+    <label>Don’t fill this out: <input name="bot-field" /></label>
+  </p>
+
   <p>
     <input type="text" name="name" placeholder="Name" required />
   </p>
+
   <p>
     <input type="email" name="email" placeholder="Email" required />
   </p>
+
   <p>
     <textarea name="message" rows="6" placeholder="Message" required></textarea>
   </p>
+
   <p>
     <button type="submit">Send</button>
   </p>
