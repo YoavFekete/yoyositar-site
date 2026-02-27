@@ -14,3 +14,13 @@ On stage, he can hold a room with a single note — and then gently lift the pul
 His debut EP, set for release in 2026, reflects this path in motion: raga meeting African melody, classical ideas opening into rock, trap, and subtle electronics.
 
 Still listening. Still moving.
+
+
+
+
+<div class="trusted-by">
+    <p class="trusted-label">Performed in</p>
+    <p class="trusted-list">
+      India · Japan · Europe · Israel
+    </p>
+</div>

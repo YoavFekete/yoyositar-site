@@ -5,11 +5,24 @@ description: Indian classical vocal & sitar.
 permalink: /shows/raga-voice/index.html
 videoId: mPYHu1lmusI
 ---
-## Raga Voice
+# Raga Voice
 
-Indian Classical Vocal & Sitar
-A raga-centered performance for voice and sitar, grounded in Indian classical tradition while allowing space for living interpretation and expressive depth. A focused and intimate listening experience adaptable from duo to full classical ensemble.
+**Indian classical vocal & sitar** — a raga-centered performance grounded in tradition, with space for living interpretation and expressive depth.
 
 {% include "components/video.njk" %}
 
-Formats: Duo (vocal + sitar) · Trio (with tabla) · Expanded classical format
+## Formats
+Duo (vocal + sitar) · Trio (with tabla) · Expanded classical ensemble
+
+## Best for
+Concert halls · Cultural centers · Listening rooms · Classical festivals
+
+## Duration
+60 / 75 / 90 minutes (flexible)
+
+## Technical
+2–4 line inputs (depending on format). Full tech rider available on request.
+
+<p class="page-cta">
+  <a class="cta-button" href="/contact/">Check availability / Book</a>
+</p>
