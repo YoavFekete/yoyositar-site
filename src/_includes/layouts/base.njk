@@ -11,6 +11,18 @@
       {{ title }} | YoYo Sitar
     {% endif %}
   </title>
+  {# Build an absolute OG image URL with per-page override #}
+  {% set ogImagePath = ogImage or '/assets/img/og/default.jpg' %}
+  {% if ogImagePath | slice(0,4) == 'http' %}
+    {% set ogImageUrl = ogImagePath %}
+  {% else %}
+    {% set base = site.url %}
+    {% if base | slice(-1) == '/' %}
+      {% set base = base | slice(0, -1) %}
+    {% endif %}
+    {% set ogImageUrl = base ~ ogImagePath %}
+  {% endif %}
+    
   <meta name="description" content="{{ description }}" />
 
   <meta name="google-site-verification" content="v07Re1acRvA14puSIIfIGQ7gZuh_CIuMoSQAXPqbWHA" />
@@ -24,16 +36,23 @@
   <meta property="og:url" content="https://yoyositar.com{{ page.url }}">
   <meta property="og:type" content="website" />
 
-  <meta property="og:image" content="https://yoyositar.com/assets/img/og-image.jpg">
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="1043" />
-
+  <meta property="og:image" content="{{ ogImageUrl }}" />
+  <meta property="og:image:secure_url" content="{{ ogImageUrl }}" />
+  {% if ogImageAlt %}
+    <meta property="og:image:alt" content="{{ ogImageAlt }}" />
+  {% endif %}
+  {# Optional if you supply them #}
+  {% if ogImageWidth %}<meta property="og:image:width" content="{{ ogImageWidth }}" />{% endif %}
+  {% if ogImageHeight %}<meta property="og:image:height" content="{{ ogImageHeight }}" />{% endif %}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ title }} — {{ site.title }}" />
+  <meta name="twitter:title" content="{{ title }}" />
   <meta name="twitter:description" content="{{ description }}" />
-  <meta name="twitter:image" content="https://yoyositar.com/assets/img/og-image.jpg">
+  <meta name="twitter:image" content="{{ ogImageUrl }}" />
+  {% if ogImageAlt %}
+    <meta name="twitter:image:alt" content="{{ ogImageAlt }}" />
+  {% endif %}
 
   <meta name="theme-color" content="#000000">
 
@@ -51,7 +70,7 @@
       "{{ site.social.bandcamp }}",
       "{{ site.social.spotify }}"
     ],
-    "genre": ["Indian classical", "World fusion",  "Afro-Indian fusion", "Improvised music, R"],
+    "genre": ["Indian classical", "World fusion",  "Afro-Indian fusion", "Improvised music"],
     "description": "Contemporary sitar artist blending Indian classical music with African, electronic and world fusion traditions."
   }
   </script>

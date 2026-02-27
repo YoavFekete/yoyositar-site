@@ -1,7 +1,10 @@
 ﻿<div class="video-container">
   <iframe
     src="https://www.youtube-nocookie.com/embed/{{ videoId }}?rel=0"
-    title="YoYo Sitar video"
+    title="{{ videoTitle or 'YoYo Sitar live performance video' }}"
+    loading="lazy"
     frameborder="0"
-    allowfullscreen></iframe>
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
 </div>

@@ -1,20 +1,37 @@
 ﻿<header class="header">
   <nav class="nav">
-    <a href="/music/">Music</a>
-    {% for s in shows %}
-          <a href="{{ s.url }}">{{ s.title }}</a>
-    {% endfor %}
-    <a href="/about/">About</a>
-    <a href="/contact/">Contact</a>
-    <a href="https://drive.google.com/drive/folders/1okhIQFjavOFf0ZoTv-CxDTQxbddhsLye"
-      target="_blank"
-      rel="noopener">
-      Press Kit
+
+    <a href="/music/"
+       {% if page.url == '/music/' %}aria-current="page"{% endif %}>
+       Music
     </a>
+
+    {% for s in shows %}
+      <a href="{{ s.url }}"
+         {% if page.url == s.url %}aria-current="page"{% endif %}>
+         {{ s.title }}
+      </a>
+    {% endfor %}
+
+    <a href="/about/"
+       {% if page.url == '/about/' %}aria-current="page"{% endif %}>
+       About
+    </a>
+
+    <a href="/contact/"
+       {% if page.url == '/contact/' %}aria-current="page"{% endif %}>
+       Contact
+    </a>
+
+    <a href="https://drive.google.com/drive/folders/1okhIQFjavOFf0ZoTv-CxDTQxbddhsLye"
+       target="_blank"
+       rel="noopener">
+       Press Kit
+    </a>
+
   </nav>
 
   <a class="site-logo" href="/" aria-label="YoYo Sitar — Home">
     <img src="/assets/img/logo-black2.png" alt="YoYo Sitar" width="1024" height="1024" />
   </a>
-
 </header>

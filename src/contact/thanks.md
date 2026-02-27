@@ -1,6 +1,7 @@
 ---
 layout: layouts/base.njk
-title: Thank you
+title: Thank you | YoYo Sitar
+description: We will replay to your message soon
 permalink: /contact/thanks/index.html
 ---
 

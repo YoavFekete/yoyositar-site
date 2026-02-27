@@ -1,8 +1,12 @@
 ﻿---
 layout: layouts/base.njk
-title: About
-description: About YoYo Sitar.
+title: About | YoYo Sitar
+description: Modern bard of the sitar, carrying raga, African melody, and modern groove into one living language.
 permalink: /about/index.html
+ogImage: /assets/img/og/default.jpg  
+ogImageAlt: YoYo Sitar performing on a large festival stage in Ludhiana, Punjab, India. Black-and-white photograph.
+ogImageWidth: 1200
+ogImageHeight: 630
 ---
 # BIOGRAPHY:
 A modern bard with a sitar in his hands, YoYo Sitar has spent over two decades following the music wherever it led — from Indian raga to Turkish makam, from West African Jali traditions to reggae and rock stages. His sound is shaped by movement and curiosity, allowing each culture to leave its fingerprints rather than its labels.

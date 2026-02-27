@@ -11,7 +11,7 @@ body{
 
 body{
   margin: 0;
-  font-family:  'Noto Sans', sans-serif; 
+  font-family:  'Inter', sans-serif; 
   background: #000;
   color: #fff;
 }
@@ -23,6 +23,11 @@ body{
   box-sizing: border-box;
 }
 
+/* Keyboard focus (accessibility) */
+:focus-visible{
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
 
 
 /* Make main expand to push footer down */
@@ -59,6 +64,7 @@ main{
   gap: 16px;
   padding: 20px 40px;
   position: relative; 
+  padding-right: 220px;
 }
 
 
@@ -74,30 +80,6 @@ main{
   height: auto;
   display: block;
 }
-
-
-/* Mobile */
-@media (max-width: 600px){
-  .header{
-    padding: 14px 26px;    /* top dis ,  side dis */
-    gap: 16px;
-  }
-
-  .nav a, .nav-group > span{
-    font-size: 16px;
-  }
-
-  .site-logo {
-    top: 0px;     /* distance from top */
-    right: 0px;   /* distance from right */
-  }
-
-  .site-logo img{
-    width: 130px;
-  }
-
-}
-
 
 /* Nav */
 
@@ -129,6 +111,10 @@ main{
    background: rgba(255,255,255,0.05);
  }
 
+.nav a:focus-visible{
+  background: rgba(255,255,255,0.08);
+}
+
 
 
 /* Dropdown */
@@ -143,6 +129,36 @@ main{
   user-select: none;
 }
 
+
+.nav a[aria-current="page"] {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+
+
+/* Mobile */
+@media (max-width: 600px){
+  .header{
+    padding: 14px 26px;    /* top dis ,  side dis */
+    padding-right: 150px;
+    gap: 16px;
+  }
+
+  .nav a, .nav-group > span{
+    font-size: 16px;
+  }
+
+  .site-logo {
+    top: 0px;     /* distance from top */
+    right: 0px;   /* distance from right */
+  }
+
+  .site-logo img{
+    width: 130px;
+  }
+
+}
 
 .page-cta{
   margin-top: 28px;
@@ -168,15 +184,6 @@ main{
   transform: translateX(6px);
   background: #fff;
   color: #000;
-}
-
-@media (max-width: 600px){
-  .book-btn{
-    top: 14px;
-    right: 26px;
-    padding: 6px 10px;
-    font-size: 11px;
-  }
 }
 
 .contact-subtitle{
@@ -225,7 +232,6 @@ main{
 .footer{
   display: flex;
   align-items: center;
-  justify-content: space-between;
   justify-content: center;   /* like the reference */
   gap: 30px;   /* distance between icons */
   padding: 20px 40px;
@@ -272,8 +278,6 @@ body.home::before{
   pointer-events: none;
   z-index: -1;
 }
-
-
 
 
 
