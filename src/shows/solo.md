@@ -1,6 +1,7 @@
 ﻿---
 layout: layouts/base.njk
-title: Solo Sitar Show | YoYo Sitar
+title: Solo Sitar
+seoTitle: Solo Sitar Show | YoYo Sitar
 description: A contemporary solo sitar concert rooted in Indian raga and live improvisation—moving from deep stillness to driving rhythm. 45–75 minutes, flexible for venues and festivals.
 permalink: /shows/solo/index.html
 videoId: uSx-PIo0wfM

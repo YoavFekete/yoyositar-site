@@ -1,6 +1,7 @@
 ﻿---
 layout: layouts/base.njk
-title: Afro-Desi Live Show | YoYo Sitar
+title: Afro-Desi
+seoTitle: Afro-Desi Live Show | YoYo Sitar
 description: A high-energy live set blending sitar, African string instruments, and rhythm—built for festivals and dance-driven stages. Duo to expanded ensemble, 45–75 minutes.
 permalink: /shows/afro-desi/index.html
 videoId: OIH_X2o5cec

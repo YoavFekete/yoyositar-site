@@ -1,6 +1,7 @@
 ﻿---
 layout: layouts/base.njk
-title: About | YoYo Sitar
+title: About
+seoTitle: About | YoYo Sitar
 description: Modern bard of the sitar, carrying raga, African melody, and modern groove into one living language.
 permalink: /about/index.html
 ogImage: /assets/img/og/default.jpg  

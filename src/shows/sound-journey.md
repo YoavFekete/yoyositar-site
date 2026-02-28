@@ -1,6 +1,7 @@
 ﻿---
 layout: layouts/base.njk
-title: Sound Journey | YoYo Sitar
+title: Sound Journey
+seoTitle:  Sound Journey | YoYo Sitar
 description: A meditative, immersive sound experience designed for deep listening, relaxation, and nervous-system regulation. Sitar-led, participatory, and adaptable for retreats and intimate settings.
 permalink: /shows/sound-journey/index.html
 videoId: 0LkJ4vXL2Nc

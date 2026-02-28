@@ -1,6 +1,7 @@
 ﻿---
 layout: layouts/base.njk
-title: Raga + Voice | YoYo Sitar
+title: Raga + Voice
+seoTitle: Raga + Voice | YoYo Sitar
 description: A classical-leaning concert with Indian vocals and sitar, exploring raga through melody, poetry, and shared improvisation. Duo to expanded classical ensemble.
 permalink: /shows/raga-voice/index.html
 videoId: mPYHu1lmusI
