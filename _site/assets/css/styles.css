@@ -170,9 +170,10 @@ body.home .site-logo::before{
   pointer-events: none;
 }
 
-body.home .site-logo{
+body.home .site-logo img{
   animation: logoFade 1.2s ease forwards;
 }
+
 
 @keyframes logoFade{
   from{
@@ -643,6 +644,32 @@ body:not(.home) .footer{
   filter: brightness(0) saturate(100%) invert(77%) sepia(43%) saturate(468%) hue-rotate(357deg) brightness(96%) contrast(90%);
 }
 
+
+/* =========================
+   HOME SEO site-description text 
+========================= */
+
+.site-description,
+.site-description h1{
+  max-width: 1000px !important;
+  margin: 0px auto 0px auto !important;
+  text-align: left !important;
+  font-size: 1rem !important;
+  line-height: 1.7  !important;
+  color: rgba(0, 0, 0, 0.45)!important; 
+  letter-spacing: 0.03em !important;
+}
+.site-description p{
+  max-width: 1000px !important;
+  margin: 0px auto 0px auto !important;
+  text-align: left !important;
+  font-size: 0.8rem !important;
+  line-height: 1.7  !important;
+  color: rgba(0, 0, 0, 0.45)!important; 
+  letter-spacing: 0.03em !important;
+}
+
+
 /* =========================
    HOME HERO — cinematic version
 ========================= */
@@ -655,7 +682,7 @@ body.home{
       rgba(0,0,0,0.24) 65%,
       rgba(0,0,0,0.34) 100%
     ),
-    url('/assets/img/home.jpg');
+    url('/assets/img/home4.jpg');
   background-size: cover;
   background-position: right top;
   background-repeat: no-repeat;
@@ -874,6 +901,7 @@ body.contact form button:hover{
   body.home .site-logo img{
     width: 160px;
   }
+  
 
   /* Mobile navigation */
   .nav-shell{
@@ -1054,6 +1082,10 @@ body.contact form button:hover{
   .footer img{
     width: 24px;
     height: 24px;
+  }
+
+  .site-description{
+    display: none;
   }
 
   body.home{

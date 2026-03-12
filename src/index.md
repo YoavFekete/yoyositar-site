@@ -11,6 +11,7 @@ ogImageWidth: 1200
 ogImageHeight: 630
 ---
 
+
 <section class="hero">
   <div class="hero-particles" aria-hidden="true">
     <span class="spark s1"></span>
@@ -22,5 +23,14 @@ ogImageHeight: 630
     <span class="spark s7"></span>
     <span class="spark s8"></span>
   </div>
+</section>
 
+<section class="site-description">
+ <h1>YoYo Sitar</h1>
+  <p>
+  YoYo Sitar is the musical project of Yoav Fekete, blending Indian sitar,
+  electronic music, African rhythms and rock influences into a modern
+  fusion sound. Explore videos, live performances and upcoming releases.
+  New album coming soon in 2026.
+  </p>
 </section>
