@@ -12,7 +12,7 @@ ogImageWidth: 1080
 ogImageHeight: 695
 ---
 
-# Solo Sitar — YoYo Sitar
+# Solo Sitar
 
 *An intimate solo performance rooted in Indian raga, unfolding with space, depth, and spontaneous storytelling.*
 

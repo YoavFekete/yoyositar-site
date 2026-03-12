@@ -71,63 +71,104 @@
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
 </head>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector(".nav-toggle");
+    const nav = document.querySelector("#site-nav");
+
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener("click", function () {
+      const isOpen = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
+  });
+</script>
+
 <body class="">
   ﻿<header class="header">
-  <nav class="nav">
+  <div class="nav-shell">
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      aria-label="Open menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <a href="/music/"
-       >
-       Music
-    </a>
-
-    
-      <a href="/shows/solo/"
+    <nav class="nav" id="site-nav">
+      <a href="/music/"
          >
-         YoYo Sitar — Solo
+         Music
       </a>
-    
-      <a href="/shows/afro-desi/"
+
+      <div class="nav-dropdown">
+        <span class="nav-parent">Live Shows</span>
+
+
+        <div class="nav-dropdown-menu">
+          
+            <a href="/shows/solo/"
+               class="nav-sub"
+               >
+               YoYo Sitar — Solo
+            </a>
+          
+            <a href="/shows/afro-desi/"
+               class="nav-sub"
+               >
+               Afro-Desi
+            </a>
+          
+            <a href="/shows/raga-voice/"
+               class="nav-sub"
+               >
+               Raga Voice
+            </a>
+          
+            <a href="/shows/sound-journey/"
+               class="nav-sub"
+               >
+               Sound Journey
+            </a>
+          
+        </div>
+      </div>
+
+      <a href="/about/"
          >
-         Afro-Desi
+         About
       </a>
-    
-      <a href="/shows/raga-voice/"
+
+      <a href="/contact/"
          >
-         Raga Voice
+         Contact
       </a>
-    
-      <a href="/shows/sound-journey/"
-         >
-         Sound Journey
+
+      <a href="https://drive.google.com/drive/folders/1okhIQFjavOFf0ZoTv-CxDTQxbddhsLye"
+         target="_blank"
+         rel="noopener">
+         Press Kit
       </a>
-    
-
-    <a href="/about/"
-       >
-       About
-    </a>
-
-    <a href="/contact/"
-       >
-       Contact
-    </a>
-
-    <a href="https://drive.google.com/drive/folders/1okhIQFjavOFf0ZoTv-CxDTQxbddhsLye"
-       target="_blank"
-       rel="noopener">
-       Press Kit
-    </a>
-
-  </nav>
+    </nav>
+  </div>
 
   <a class="site-logo" href="/" aria-label="YoYo Sitar — Home">
-    <img src="/assets/img/logo-black2.png" alt="YoYo Sitar" width="1024" height="1024" />
+    <img src="/assets/img/logo-black5.png" alt="YoYo Sitar" width="1024" height="1024" />
   </a>
 </header>
   <main class="page">

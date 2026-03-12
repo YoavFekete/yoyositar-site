@@ -1,37 +1,57 @@
 ﻿<header class="header">
-  <nav class="nav">
+  <div class="nav-shell">
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      aria-label="Open menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <a href="/music/"
-       {% if page.url == '/music/' %}aria-current="page"{% endif %}>
-       Music
-    </a>
-
-    {% for s in shows %}
-      <a href="{{ s.url }}"
-         {% if page.url == s.url %}aria-current="page"{% endif %}>
-         {{ s.title }}
+    <nav class="nav" id="site-nav">
+      <a href="/music/"
+         {% if page.url == '/music/' %}aria-current="page"{% endif %}>
+         Music
       </a>
-    {% endfor %}
 
-    <a href="/about/"
-       {% if page.url == '/about/' %}aria-current="page"{% endif %}>
-       About
-    </a>
+      <div class="nav-dropdown{% for s in shows %}{% if page.url == s.url %} is-current{% endif %}{% endfor %}">
+        <span class="nav-parent">Live Shows</span>
 
-    <a href="/contact/"
-       {% if page.url == '/contact/' %}aria-current="page"{% endif %}>
-       Contact
-    </a>
 
-    <a href="https://drive.google.com/drive/folders/1okhIQFjavOFf0ZoTv-CxDTQxbddhsLye"
-       target="_blank"
-       rel="noopener">
-       Press Kit
-    </a>
+        <div class="nav-dropdown-menu">
+          {% for s in shows %}
+            <a href="{{ s.url }}"
+               class="nav-sub"
+               {% if page.url == s.url %}aria-current="page"{% endif %}>
+               {{ s.title }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
 
-  </nav>
+      <a href="/about/"
+         {% if page.url == '/about/' %}aria-current="page"{% endif %}>
+         About
+      </a>
+
+      <a href="/contact/"
+         {% if page.url == '/contact/' %}aria-current="page"{% endif %}>
+         Contact
+      </a>
+
+      <a href="https://drive.google.com/drive/folders/1okhIQFjavOFf0ZoTv-CxDTQxbddhsLye"
+         target="_blank"
+         rel="noopener">
+         Press Kit
+      </a>
+    </nav>
+  </div>
 
   <a class="site-logo" href="/" aria-label="YoYo Sitar — Home">
-    <img src="/assets/img/logo-black2.png" alt="YoYo Sitar" width="1024" height="1024" />
+    <img src="/assets/img/logo-black5.png" alt="YoYo Sitar" width="1024" height="1024" />
   </a>
 </header>
