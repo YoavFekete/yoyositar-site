@@ -655,7 +655,7 @@ body.home{
       rgba(0,0,0,0.24) 65%,
       rgba(0,0,0,0.34) 100%
     ),
-    url('/assets/img/home1.jpg');
+    url('/assets/img/home.jpg');
   background-size: cover;
   background-position: right top;
   background-repeat: no-repeat;
