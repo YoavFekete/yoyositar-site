@@ -1462,8 +1462,8 @@ body.contact form button:hover{
   body.home .nav-group > span,
   body.home .nav-parent{
     width: 100%;
-    padding: 6px 11px 6px 10px;
-    font-size: 12px;
+    padding: 6px 11px 10px 10px;
+    font-size: 14px;
     letter-spacing: 0.10em;
   }
 
@@ -1473,21 +1473,21 @@ body.contact form button:hover{
 
   body.home .nav-parent{
     padding: 6px 11px 2px 10px;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.17em;
   }
   
 
   body.home .nav-dropdown-menu .nav-sub{
     padding: 6px 11px 6px 22px !important;
-    font-size: 11px !important;
+    font-size: 12px !important;
     letter-spacing: 0.09em !important;
   }
 
   .hero-audio{
     position: fixed;
     gap: 12px;
-    top: 50%;
+    top: 57%;
     left: 70%;
     margin-top: 50px;
     margin-left: 0;
@@ -1519,7 +1519,7 @@ body.contact form button:hover{
     min-width: 0;
     align-items: center;
     text-align: center;
-    transform: scale(0.457);
+    transform: scale(0.55);
     transform-origin: center top;
     margin-top: -8px;
     margin-right: 0;
