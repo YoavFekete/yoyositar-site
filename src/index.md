@@ -22,6 +22,10 @@ ogImageHeight: 630
     <span class="spark s6"></span>
     <span class="spark s7"></span>
     <span class="spark s8"></span>
+    <span class="spark spark-spiral sp1"></span>
+    <span class="spark spark-spiral sp2"></span>
+    <span class="spark spark-spiral sp3"></span>
+    <span class="spark spark-spiral-wild sp4"><span class="spark-spiral-core"></span></span>
   </div>
 </section>
 

@@ -164,8 +164,11 @@ body.home .site-logo::before{
   content: "";
   position: absolute;
   inset: 18% 10% 18% 10%;
-  background: radial-gradient(circle, rgba(212,175,90,0.16) 0%, rgba(212,175,90,0.06) 38%, rgba(212,175,90,0) 72%);
+  background: radial-gradient(circle, rgba(212,175,90,0.22) 0%, rgba(212,175,90,0.09) 38%, rgba(212,175,90,0) 72%);
   filter: blur(16px);
+  opacity: 0.72;
+  transform-origin: center;
+  animation: logoGlowPulse 4.8s ease-in-out infinite;
   z-index: -1;
   pointer-events: none;
 }
@@ -186,6 +189,17 @@ body.home .site-logo img{
   }
 }
 
+@keyframes logoGlowPulse{
+  0%, 100%{
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  50%{
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
 body.home .hero{
   padding-top: 200px;
 }
@@ -202,6 +216,17 @@ body.home .page{
   to{
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes heroGlowPulse{
+  0%, 100%{
+    opacity: 0.52;
+    transform: scale(0.94);
+  }
+  50%{
+    opacity: 0.9;
+    transform: scale(1.08);
   }
 }
 
@@ -265,6 +290,7 @@ body.home .nav{
   display: inline-flex;
   width: auto;
   align-items: center;
+  justify-content: flex-start;
   padding: 6px 0;
   border-radius: 999px;
   border-left: 1px solid transparent;
@@ -272,11 +298,16 @@ body.home .nav{
   font-family: 'Cinzel', serif;
   font-weight: 500;
   font-size: 16px;
+  line-height: 1.2;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--gold);
   opacity: 0.92;
+  background: transparent;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
 
   transition:
     transform 220ms ease,
@@ -388,7 +419,8 @@ body.home .nav-parent{
 }
 
 .nav-parent{
-  cursor: default;
+  appearance: none;
+  cursor: pointer;
   user-select: none;
 }
 
@@ -401,6 +433,7 @@ body.home .nav-parent{
 
 .nav-dropdown:hover .nav-parent,
 .nav-dropdown:focus-within .nav-parent,
+.nav-dropdown.is-open .nav-parent,
 .nav-dropdown.is-current .nav-parent{
   color: var(--gold-soft);
   opacity: 1;
@@ -438,7 +471,8 @@ body:not(.home) .nav-dropdown-menu{
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
-.nav-dropdown:focus-within .nav-dropdown-menu{
+.nav-dropdown:focus-within .nav-dropdown-menu,
+.nav-dropdown.is-open .nav-dropdown-menu{
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -701,6 +735,24 @@ body.home::before{
   z-index: -1;
 }
 
+body.home::after{
+  content: "";
+  position: fixed;
+  top: -120px;
+  right: 150px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(230,200,117,0.30) 0%, rgba(212,175,90,0.16) 26%, rgba(212,175,90,0.07) 48%, rgba(212,175,90,0) 72%);
+  filter: blur(18px);
+  opacity: 0.78;
+  transform-origin: center;
+  animation: heroGlowPulse 5.8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* Make homepage content sit in the darker left zone */
 body.home main{
   max-width: 620px;
@@ -754,6 +806,37 @@ body.home .page-cta{
   filter: blur(2px);
 }
 
+.spark-spiral{
+  width: 5px;
+  height: 5px;
+  background: rgba(230,200,117,0.95);
+  box-shadow:
+    0 0 12px rgba(230,200,117,0.55),
+    0 0 26px rgba(212,175,90,0.32);
+  animation: spiralSpark 7.2s ease-in-out infinite;
+}
+
+.spark-spiral-wild{
+  width: 7px;
+  height: 7px;
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+  animation: spiralSparkWildPath 9.4s linear infinite;
+}
+
+.spark-spiral-core{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(245,220,140,0.98);
+  box-shadow:
+    0 0 14px rgba(245,220,140,0.70),
+    0 0 34px rgba(212,175,90,0.42);
+  animation: spiralSparkWildPulse 9.4s ease-in-out infinite;
+}
+
 
 /*.spark{
   position: absolute;
@@ -788,6 +871,11 @@ body.home .page-cta{
   box-shadow: 0 0 10px rgba(29,167,165,0.40);
 }
 
+.sp1{ left: 16%; top: 88%; animation-delay: 0.6s; }
+.sp2{ left: 43%; top: 94%; animation-delay: 2.3s; }
+.sp3{ left: 78%; top: 89%; animation-delay: 4.1s; }
+.sp4{ left: 58%; top: 96%; animation-delay: 1.7s; }
+
 @keyframes floatSpark{
   0%{
     transform: translate3d(0, 0, 0) scale(1);
@@ -805,11 +893,116 @@ body.home .page-cta{
   }
 }
 
+@keyframes spiralSpark{
+  0%{
+    transform: translate3d(0, 0, 0) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  12%{
+    opacity: 0.95;
+  }
+  35%{
+    transform: translate3d(16px, -58px, 0) scale(1.1) rotate(110deg);
+  }
+  62%{
+    transform: translate3d(-14px, -128px, 0) scale(0.86) rotate(250deg);
+    opacity: 0.75;
+  }
+  100%{
+    transform: translate3d(22px, -214px, 0) scale(0.32) rotate(420deg);
+    opacity: 0;
+  }
+}
+
+@keyframes spiralSparkWildPath{
+  0%{
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  12.5%{
+    transform: translate3d(16px, -24px, 0) rotate(52deg);
+  }
+  25%{
+    transform: translate3d(24px, -56px, 0) rotate(104deg);
+  }
+  37.5%{
+    transform: translate3d(14px, -92px, 0) rotate(156deg);
+  }
+  50%{
+    transform: translate3d(-4px, -128px, 0) rotate(208deg);
+  }
+  62.5%{
+    transform: translate3d(-20px, -164px, 0) rotate(260deg);
+  }
+  75%{
+    transform: translate3d(-10px, -206px, 0) rotate(312deg);
+  }
+  87.5%{
+    transform: translate3d(14px, -244px, 0) rotate(416deg);
+  }
+  100%{
+    transform: translate3d(0px, -278px, 0) rotate(520deg);
+  }
+}
+
+@keyframes spiralSparkWildPulse{
+  0%{
+    transform: scale(0.44);
+    opacity: 0;
+    filter: blur(2.8px);
+  }
+  12.5%{
+    transform: scale(0.8);
+    opacity: 0.74;
+    filter: blur(1.8px);
+  }
+  25%{
+    transform: scale(1.02);
+    opacity: 0.86;
+    filter: blur(1.1px);
+  }
+  37.5%{
+    transform: scale(1.12);
+    opacity: 0.82;
+    filter: blur(0.95px);
+  }
+  50%{
+    transform: scale(0.94);
+    opacity: 0.78;
+    filter: blur(1.05px);
+  }
+  62.5%{
+    transform: scale(0.82);
+    opacity: 0.8;
+    filter: blur(1.1px);
+  }
+  75%{
+    transform: scale(1.08);
+    opacity: 0.81;
+    filter: blur(0.85px);
+  }
+  87.5%{
+    transform: scale(0.62);
+    opacity: 0.5;
+    filter: blur(1.6px);
+  }
+  100%{
+    transform: scale(0.28);
+    opacity: 0;
+    filter: blur(3px);
+  }
+}
+
 /* accessibility */
 @media (prefers-reduced-motion: reduce){
   .spark{
     animation: none;
     opacity: 0.18;
+  }
+
+  .spark-spiral-core{
+    animation: none;
+    opacity: 0.18;
+    filter: blur(1px);
   }
 }
 
@@ -901,6 +1094,10 @@ body.contact form button:hover{
 
   body.home .site-logo img{
     width: 160px;
+  }
+
+  body.home::after{
+    right: 0px;
   }
   
 
@@ -1090,6 +1287,7 @@ body.contact form button:hover{
   }
 
   body.home{
+    background-size: 150% ;
     background-position: 82% 0%;
     background-attachment: scroll;
   }

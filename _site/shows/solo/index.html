@@ -89,13 +89,53 @@
   document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.querySelector(".nav-toggle");
     const nav = document.querySelector("#site-nav");
+    const dropdown = document.querySelector(".nav-dropdown");
+    const dropdownButton = dropdown ? dropdown.querySelector(".nav-parent") : null;
 
-    if (!toggle || !nav) return;
+    if (toggle && nav) {
+      toggle.addEventListener("click", function () {
+        const isOpen = nav.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+      });
+    }
 
-    toggle.addEventListener("click", function () {
-      const isOpen = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    if (!dropdown || !dropdownButton) return;
+
+    const closeDropdown = function () {
+      dropdown.classList.remove("is-open");
+      dropdownButton.setAttribute("aria-expanded", "false");
+    };
+
+    const openDropdown = function () {
+      dropdown.classList.add("is-open");
+      dropdownButton.setAttribute("aria-expanded", "true");
+    };
+
+    dropdownButton.addEventListener("click", function (event) {
+      const isDesktopStaticMenu = window.matchMedia("(max-width: 900px)").matches || document.body.classList.contains("home");
+      if (isDesktopStaticMenu) return;
+
+      event.preventDefault();
+      const isOpen = dropdown.classList.contains("is-open");
+      if (isOpen) {
+        closeDropdown();
+      } else {
+        openDropdown();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!dropdown.contains(event.target)) {
+        closeDropdown();
+      }
+    });
+
+    dropdown.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeDropdown();
+        dropdownButton.focus();
+      }
     });
   });
 </script>
@@ -122,10 +162,17 @@
       </a>
 
       <div class="nav-dropdown is-current">
-        <span class="nav-parent">Live Shows</span>
+        <button
+          class="nav-parent"
+          type="button"
+          aria-expanded="false"
+          aria-controls="shows-menu"
+        >
+          Live Shows
+        </button>
 
 
-        <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-menu" id="shows-menu">
           
             <a href="/shows/solo/"
                class="nav-sub"
@@ -176,6 +223,7 @@
     <img src="/assets/img/logo-black5.png" alt="YoYo Sitar" width="1024" height="1024" />
   </a>
 </header>
+
   <main class="page">
     <h1>Solo Sitar</h1>
 <p><em>An intimate solo performance rooted in Indian raga, unfolding with space, depth, and spontaneous storytelling.</em></p>
