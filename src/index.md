@@ -24,7 +24,7 @@ ogImageHeight: 630
 
   <div class="hero-audio-copy">
     <p class="hero-audio-kicker">Evening Rise</p>
-    <p class="hero-audio-title">2026 album preview</p>
+    <p class="hero-audio-title">First glimpse from the 2026 EP</p>
   </div>
 
   <audio class="hero-audio-element" preload="none">
