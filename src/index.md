@@ -11,6 +11,26 @@ ogImageWidth: 1200
 ogImageHeight: 630
 ---
 
+<div class="hero-audio" data-audio-player>
+  <button
+    class="hero-audio-toggle"
+    type="button"
+    aria-pressed="false"
+    aria-label="Play featured intro"
+  >
+    <span class="hero-audio-icon" aria-hidden="true"></span>
+    <span class="hero-audio-label">Listen</span>
+  </button>
+
+  <div class="hero-audio-copy">
+    <p class="hero-audio-kicker">Evening Rise</p>
+    <p class="hero-audio-title">2026 album preview</p>
+  </div>
+
+  <audio class="hero-audio-element" preload="none">
+    <source src="/assets/music/intro_1_min.mp3" type="audio/mpeg" />
+  </audio>
+</div>
 
 <section class="hero">
   <div class="hero-particles" aria-hidden="true">

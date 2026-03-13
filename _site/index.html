@@ -91,6 +91,7 @@
     const nav = document.querySelector("#site-nav");
     const dropdown = document.querySelector(".nav-dropdown");
     const dropdownButton = dropdown ? dropdown.querySelector(".nav-parent") : null;
+    const audioPlayers = document.querySelectorAll("[data-audio-player]");
 
     if (toggle && nav) {
       toggle.addEventListener("click", function () {
@@ -136,6 +137,58 @@
         closeDropdown();
         dropdownButton.focus();
       }
+    });
+
+    audioPlayers.forEach(function (player) {
+      const button = player.querySelector(".hero-audio-toggle");
+      const label = player.querySelector(".hero-audio-label");
+      const audio = player.querySelector(".hero-audio-element");
+
+      if (!button || !label || !audio) return;
+
+      const setPlayingState = function (isPlaying) {
+        player.classList.toggle("is-playing", isPlaying);
+        button.setAttribute("aria-pressed", isPlaying ? "true" : "false");
+        button.setAttribute("aria-label", isPlaying ? "Pause featured intro" : "Play featured intro");
+        label.textContent = isPlaying ? "Pause" : "Listen";
+      };
+
+      button.addEventListener("click", function () {
+        if (audio.paused) {
+          audioPlayers.forEach(function (otherPlayer) {
+            if (otherPlayer === player) return;
+
+            const otherAudio = otherPlayer.querySelector(".hero-audio-element");
+            const otherButton = otherPlayer.querySelector(".hero-audio-toggle");
+            const otherLabel = otherPlayer.querySelector(".hero-audio-label");
+
+            if (otherAudio) otherAudio.pause();
+            otherPlayer.classList.remove("is-playing");
+            if (otherButton) {
+              otherButton.setAttribute("aria-pressed", "false");
+              otherButton.setAttribute("aria-label", "Play featured intro");
+            }
+            if (otherLabel) otherLabel.textContent = "Listen";
+          });
+
+          audio.play();
+          setPlayingState(true);
+        } else {
+          audio.pause();
+          setPlayingState(false);
+        }
+      });
+
+      audio.addEventListener("ended", function () {
+        audio.currentTime = 0;
+        setPlayingState(false);
+      });
+
+      audio.addEventListener("pause", function () {
+        if (!audio.ended) {
+          setPlayingState(false);
+        }
+      });
     });
   });
 </script>
@@ -225,7 +278,25 @@
 </header>
 
   <main class="page">
-    <section class="hero">
+    <div class="hero-audio" data-audio-player>
+  <button
+    class="hero-audio-toggle"
+    type="button"
+    aria-pressed="false"
+    aria-label="Play featured intro"
+  >
+    <span class="hero-audio-icon" aria-hidden="true"></span>
+    <span class="hero-audio-label">Listen</span>
+  </button>
+  <div class="hero-audio-copy">
+    <p class="hero-audio-kicker">Evening Rise</p>
+    <p class="hero-audio-title">2026 album preview</p>
+  </div>
+  <audio class="hero-audio-element" preload="none">
+    <source src="/assets/music/intro_1_min.mp3" type="audio/mpeg" />
+  </audio>
+</div>
+<section class="hero">
   <div class="hero-particles" aria-hidden="true">
     <span class="spark s1"></span>
     <span class="spark s2"></span>
