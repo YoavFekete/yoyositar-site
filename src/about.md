@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 title: About
 seoTitle: About | YoYo Sitar
-description: Modern bard of the sitar, carrying raga, African melody, and modern groove into one living language.
+description: Modern bard of the sitar exploring Indian raga, African string traditions, and modern groove in one living musical language.
 permalink: /about/index.html
 ogImage: /assets/img/og/default.jpg  
 ogImageAlt: YoYo Sitar performing on a large festival stage in Ludhiana, Punjab, India. Black-and-white photograph.
@@ -10,16 +10,20 @@ ogImageWidth: 1200
 ogImageHeight: 630
 ---
 # BIOGRAPHY:
-A modern bard with a sitar in his hands, YoYo Sitar has spent over two decades following the music wherever it led — from Indian raga to Turkish makam, from West African Jali traditions to reggae and rock stages. His sound is shaped by movement and curiosity, allowing each culture to leave its fingerprints rather than its labels.
 
-He trained deeply in Indian classical music under Rudra Veena master Dudu Elkabir of the Dagar Gharana lineage, absorbing the breath and depth of dhrupad. Seven years performing in a Turkish Sufi orchestra, along with close immersion in West African kora and goni music, expanded his musical language beyond a single system. These influences do not sit beside one another — they move naturally inside his phrasing.
+A modern bard with a sitar in his hands, YoYo Sitar (Yoav Fekete) has spent more than two decades following music across cultures — from the depths of Indian raga to the modal world of Turkish makam, and from West African Jali traditions to contemporary stages blending groove, improvisation, and modern sound.
 
-On stage, he can hold a room with a single note — and then gently lift the pulse without losing depth. His music is emotionally direct, grounded, and alive.
+He studied Indian classical music with Rudra Veena master Dudu Elkabir of the Dagar Gharana lineage, absorbing the breath and depth of the dhrupad tradition. Years performing in a Turkish Sufi orchestra, together with close immersion in West African kora and goni traditions, expanded his musical language beyond a single system.
 
-His debut EP, set for release in 2026, reflects this path in motion: raga meeting African melody, classical ideas opening into rock, trap, and subtle electronics.
+Rather than combining styles on the surface, YoYo Sitar allows different traditions to move naturally inside the same melodic space.
+
+This long journey between musical cultures has led to the development of Afro-Raga — a musical dialogue exploring the meeting point between the Indian raga system and West African string traditions.
+
+On stage he can hold a room with a single note — and then slowly lift the pulse without losing depth. His music is emotionally direct, grounded, and alive.
+
+His debut EP, to be released in 2026, continues this path in motion: raga meeting African melody, classical ideas classical ideas opening into rock, trap, and subtle electronics.
 
 Still listening. Still moving.
-
 
 
 
