@@ -5,10 +5,10 @@ seoTitle: Contemporary Sitar Fusion Artist | YoYo Sitar
 description: Contemporary sitar performances blending Indian raga with African grooves, improvisation, and modern textures. Available for festivals, concerts, and cultural events.
 permalink: /index.html
 bodyClass: home
-ogImage: /assets/img/og/default.jpg  
+ogImage: /assets/img/og/default2.jpg  
 ogImageAlt: YoYo Sitar performing on a large festival stage in Ludhiana, Punjab, India. Black-and-white photograph.
-ogImageWidth: 1200
-ogImageHeight: 630
+ogImageWidth: 1536
+ogImageHeight: 1024
 ---
 
 <div class="hero-audio" data-audio-player>

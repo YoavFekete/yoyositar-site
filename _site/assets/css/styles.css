@@ -230,6 +230,17 @@ body.home .page{
   }
 }
 
+@keyframes listenButtonPulse{
+  0%, 100%{
+    background: rgba(212,175,90,0.08);
+    box-shadow: 0 0 0 rgba(212,175,90,0);
+  }
+  50%{
+    background: rgba(212,175,90,0.16);
+    box-shadow: 0 0 18px rgba(212,175,90,0.16);
+  }
+}
+
 body.home .header{
   position: relative;
   padding-top: 54px;
@@ -812,18 +823,19 @@ body.home .page-cta{
   appearance: none;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 38px;
-  padding: 0 14px 0 12px;
+  gap: 10px;
+  min-height: 49px;
+  padding: 0 18px 0 16px;
   border: 0;
   border-radius: 999px;
   background: rgba(212,175,90,0.08);
   color: var(--gold-soft);
   cursor: pointer;
   font-family: 'Cinzel', serif;
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  animation: listenButtonPulse 2.2s ease-in-out infinite;
   transition:
     transform 180ms ease,
     background 180ms ease,
@@ -840,8 +852,8 @@ body.home .page-cta{
 
 .hero-audio-icon{
   position: relative;
-  width: 18px;
-  height: 18px;
+  width: 23px;
+  height: 23px;
   border-radius: 50%;
   border: 1px solid rgba(230,200,117,0.42);
   background: radial-gradient(circle, rgba(230,200,117,0.18), rgba(212,175,90,0.04));
@@ -855,19 +867,19 @@ body.home .page-cta{
   left: 50%;
   width: 0;
   height: 0;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-left: 6px solid var(--gold-soft);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid var(--gold-soft);
   transform: translate(-35%, -50%);
   transition: transform 180ms ease, opacity 180ms ease, border-left-color 180ms ease;
 }
 
 .hero-audio.is-playing .hero-audio-icon::before{
-  width: 5px;
-  height: 8px;
+  width: 6px;
+  height: 10px;
   border: 0;
   background:
-    linear-gradient(to right, var(--gold-soft) 0 2px, transparent 2px 3px, var(--gold-soft) 3px 5px);
+    linear-gradient(to right, var(--gold-soft) 0 2px, transparent 2px 4px, var(--gold-soft) 4px 6px);
   transform: translate(-50%, -50%);
 }
 
@@ -1222,6 +1234,10 @@ body.home .page-cta{
   .spark{
     animation: none;
     opacity: 0.18;
+  }
+
+  .hero-audio-toggle{
+    animation: none;
   }
 
   .hero-particles::before{
