@@ -1338,23 +1338,6 @@ body.home .page-cta{
   animation: spiralSparkWildPulse 9.4s ease-in-out infinite;
 }
 
-
-/*.spark{
-  position: absolute;
-  width: 2px;
-  height: 14px;
-  border-radius: 999px;
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0),
-    rgba(212,175,90,0.95),
-    rgba(255,255,255,0)
-  );
-  opacity: 0;
-  transform: rotate(18deg);
-  filter: blur(0.3px);
-  animation: floatSpark 8s linear infinite;
-}*/
 /* individual positions / timing */
 .s1{ left: 12%; top: 80%; animation-delay: 0s;   transform: scale(1.0); }
 .s2{ left: 22%; top: 92%; animation-delay: 1.4s; transform: scale(0.8); }
@@ -1960,27 +1943,6 @@ body:not(.home) .hero-audio-copy{
 }
 
 /* =========================
-   Global Audio Player Position Fix
-========================= */
-body:not(.home) .hero-audio{
-  top: 28px;
-  left: 200px;
-  right: auto;
-  transform: none;
-  margin-top: 0;
-}
-
-@media (max-width: 600px){
-  body:not(.home) .hero-audio{
-    top: 16px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    margin-top: 0;
-  }
-}
-
-/* =========================
    Global Audio Player Copy Visibility
 ========================= */
 body:not(.home) .hero-audio-copy{
@@ -2007,57 +1969,10 @@ body:not(.home) .hero-audio:focus-within .hero-audio-copy{
 /* =========================
    Global Audio Player Position Tweak
 ========================= */
-body:not(.home) .hero-audio{
-  left: 300px;
-}
 
 @media (max-width: 600px){
   body.home .hero-audio{
     top: calc(57% - 100px);
-  }
-}
-
-/* =========================
-   Global Audio Player Desktop-Only Position Fix
-========================= */
-@media (min-width: 601px){
-  body:not(.home) .hero-audio{
-    left: 300px;
-    right: auto;
-    top: 28px;
-    transform: none;
-  }
-}
-
-@media (max-width: 600px){
-  body:not(.home) .hero-audio{
-    left: 50%;
-    right: auto;
-    top: 16px;
-    transform: translateX(-50%);
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Desktop Top Fix
-========================= */
-@media (min-width: 601px){
-  body:not(.home) .hero-audio{
-    top: 28px !important;
-    bottom: auto !important;
-    transform: none !important;
-    margin-top: 0 !important;
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Desktop Left Fix
-========================= */
-@media (min-width: 601px){
-  body:not(.home) .hero-audio{
-    left: 300px !important;
-    right: auto !important;
-    transform: none !important;
   }
 }
 
@@ -2067,23 +1982,11 @@ body:not(.home) .hero-audio{
 @media (min-width: 601px){
   body:not(.home) .hero-audio{
     left: auto !important;
-    right: 300px !important;
+    right: 200px !important;
     top: 28px !important;
     transform: none !important;
   }
 }
-
-/* =========================
-   Global Audio Player Non-Home Desktop Right Offset Fix
-========================= */
-@media (min-width: 601px){
-  body:not(.home) .hero-audio{
-    right: 200px !important;
-  }
-}
-
-
-
 /* =========================
    Global Audio Player Non-Home Mobile Header Row
 ========================= */
@@ -2095,17 +1998,18 @@ body:not(.home) .hero-audio{
   body:not(.home) .header-chrome{
     display: grid;
     grid-template-columns: auto 1fr auto;
-    align-items: start;
     width: 100%;
     column-gap: 10px;
+    align-items: center;
   }
 
   body:not(.home) .nav-shell{
     width: auto;
     max-width: none;
+    justify-self: start;
   }
 
-  body:not(.home) .hero-audio{
+  body:not(.home) .hero-audio{    
     position: static !important;
     top: auto !important;
     left: auto !important;
@@ -2118,10 +2022,18 @@ body:not(.home) .hero-audio{
     justify-self: center;
     align-items: center;
     z-index: 1;
+    position: relative;
+    top: 100px;
+    left: -10px;
+    margin-top: 50px !important;
+    margin-left: -80px !important;
+    margin-right: 0 !important;
   }
 
   body:not(.home) .site-logo{
     position: static;
+    align-self: center;
+    justify-self: center;
     justify-self: end;
   }
 
@@ -2136,100 +2048,5 @@ body:not(.home) .hero-audio{
 @media (max-width: 600px){
   body:not(.home) .header-chrome{
     column-gap: 0;
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Mobile Header Cell Alignment
-========================= */
-@media (max-width: 600px){
-  body:not(.home) .header-chrome{
-    align-items: center;
-  }
-
-  body:not(.home) .nav-shell,
-  body:not(.home) .hero-audio,
-  body:not(.home) .site-logo{
-    align-self: center;
-    justify-self: center;
-  }
-
-  body:not(.home) .nav-shell{
-    justify-self: start;
-  }
-
-  body:not(.home) .site-logo{
-    justify-self: end;
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Mobile Nudge
-========================= */
-@media (max-width: 600px){
-  body:not(.home) .hero-audio{
-    position: relative;
-    top: 30px;
-    left: -10px;
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Mobile Nudge Update
-========================= */
-@media (max-width: 600px){
-  body:not(.home) .hero-audio{
-    top: 100px;
-    left: -10px;
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Mobile Margin Nudge
-========================= */
-@media (max-width: 600px){
-  body:not(.home) .hero-audio{
-    position: static !important;
-    margin-top: 100px !important;
-    margin-left: -10px !important;
-    margin-right: 0 !important;
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Mobile Final Nudge
-========================= */
-@media (max-width: 600px){
-  body:not(.home) .hero-audio{
-    margin-top: 50px !important;
-    margin-left: -30px !important;
-    margin-right: 0 !important;
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Mobile Horizontal Fix
-========================= */
-@media (max-width: 600px){
-  body:not(.home) .hero-audio{
-    margin-left: 30px !important;
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Mobile Left Offset Update
-========================= */
-@media (max-width: 600px){
-  body:not(.home) .hero-audio{
-    margin-left: -100px !important;
-  }
-}
-
-/* =========================
-   Global Audio Player Non-Home Mobile Left Offset Final Update
-========================= */
-@media (max-width: 600px){
-  body:not(.home) .hero-audio{
-    margin-left: -80px !important;
   }
 }pp
