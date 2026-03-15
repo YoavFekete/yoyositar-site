@@ -425,8 +425,24 @@
           throw new Error("Incomplete page shell");
         }
 
+        const persistentPlayer = document.querySelector("[data-global-audio-player]");
+
         currentMain.innerHTML = nextMain.innerHTML;
         currentChrome.innerHTML = nextChrome.innerHTML;
+
+        if (persistentPlayer && currentChrome && !currentChrome.contains(persistentPlayer)) {
+          const nextPlayer = currentChrome.querySelector("[data-global-audio-player]");
+          if (nextPlayer) {
+            nextPlayer.replaceWith(persistentPlayer);
+          } else {
+            const siteLogo = currentChrome.querySelector(".site-logo");
+            if (siteLogo) {
+              currentChrome.insertBefore(persistentPlayer, siteLogo);
+            } else {
+              currentChrome.appendChild(persistentPlayer);
+            }
+          }
+        }
 
         syncHead(nextDoc);
         syncBodyAttributes(nextDoc.body);

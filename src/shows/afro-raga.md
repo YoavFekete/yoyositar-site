@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 title: Afro-Raga
 seoTitle: Afro-Raga | YoYo Sitar & Tomer Yehieli Sitar and Kora Live Show
- description: Afro-Raga is a live show by YoYo Sitar and kora player Tomer Yehieli exploring the dialogue between Indian raga and the West African kora tradition. Duo to expanded ensemble, 45-75 minutes.
+description: Afro-Raga is a live show by YoYo Sitar and kora player Tomer Yehieli exploring the dialogue between Indian raga and the West African kora tradition. Duo to expanded ensemble, 45-75 minutes.
 permalink: /shows/afro-raga/index.html
 videoId: OIH_X2o5cec
 videoTitle: Afro-Raga live performance by YoYo Sitar with kora player Tomer Yehieli
