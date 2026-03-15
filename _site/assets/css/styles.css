@@ -2050,3 +2050,130 @@ body:not(.home) .hero-audio:focus-within .hero-audio-copy{
     column-gap: 0;
   }
 }pp
+/* =========================
+   Blog
+========================= */
+.blog-listing,
+.blog-post-shell{
+  padding-bottom: 72px;
+}
+
+.blog-listing-head,
+.blog-post-hero{
+  margin-bottom: 34px;
+}
+
+.blog-kicker,
+.blog-card-date,
+.blog-post-meta{
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.blog-kicker{
+  margin: 0 0 14px;
+  font-size: 12px;
+  color: rgba(230,200,117,0.72);
+}
+
+.blog-intro,
+.blog-post-excerpt{
+  max-width: 44ch;
+  font-size: 20px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.8);
+}
+
+.blog-card-grid{
+  display: grid;
+  gap: 18px;
+}
+
+.blog-card{
+  padding: 24px 24px 22px;
+  border: 1px solid rgba(230,200,117,0.16);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.018));
+  box-shadow: 0 18px 44px rgba(0,0,0,0.18);
+}
+
+.blog-card h2{
+  margin-bottom: 12px;
+}
+
+.blog-card h2 a,
+.blog-card-link{
+  text-decoration: none;
+}
+
+.blog-card-date,
+.blog-post-meta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 12px;
+  font-size: 11px;
+  color: rgba(230,200,117,0.72);
+}
+
+.blog-card p:last-child,
+.blog-post-shell p:last-child{
+  margin-bottom: 0;
+}
+
+.blog-card-link{
+  display: inline-flex;
+  margin-top: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.blog-post-image{
+  margin: 0 0 28px;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(230,200,117,0.16);
+  background: rgba(255,255,255,0.02);
+}
+
+.blog-post-image img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.blog-richtext h2,
+.blog-richtext h3{
+  margin-top: 34px;
+}
+
+.blog-richtext ul,
+.blog-richtext ol{
+  margin: 0 0 20px;
+  padding-left: 24px;
+  color: rgba(255,255,255,0.84);
+}
+
+.blog-richtext li + li{
+  margin-top: 8px;
+}
+
+@media (max-width: 600px){
+  .blog-listing,
+  .blog-post-shell{
+    padding-bottom: 48px;
+  }
+
+  .blog-intro,
+  .blog-post-excerpt{
+    font-size: 18px;
+  }
+
+  .blog-card{
+    padding: 20px 18px 18px;
+    border-radius: 20px;
+  }
+}

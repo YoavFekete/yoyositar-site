@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+bodyClass: blog-post
+---
+<article class="blog-post-shell">
+  <header class="blog-post-hero">
+    <p class="blog-kicker">Journal</p>
+    <h1>{{ title }}</h1>
+    <div class="blog-post-meta">
+      <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
+      {% if author %}
+        <span>{{ author }}</span>
+      {% endif %}
+    </div>
+    {% if excerpt %}
+      <p class="blog-post-excerpt">{{ excerpt }}</p>
+    {% endif %}
+  </header>
+
+  {% if featuredImage %}
+    <figure class="blog-post-image">
+      <img src="{{ featuredImage }}" alt="{{ featuredImageAlt or title }}" />
+    </figure>
+  {% endif %}
+
+  <div class="blog-richtext">
+    {{ content | safe }}
+  </div>
+</article>

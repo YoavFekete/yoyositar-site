@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "src/assets/uploads"
+public_folder: "/assets/uploads"
+
+site_url: "https://yoyositar.com"
+display_url: "https://yoyositar.com"
+logo_url: "/assets/img/logo-black5.png"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/blog/posts"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "blog/{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "SEO Title", name: "seoTitle", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Author", name: "author", widget: "string", default: "YoYo Sitar" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
+      - { label: "Featured Image Alt", name: "featuredImageAlt", widget: "string", required: false }
+      - label: "Layout"
+        name: "layout"
+        widget: "hidden"
+        default: "layouts/blog-post.njk"
+      - label: "Tags"
+        name: "tags"
+        widget: "hidden"
+        default:
+          - "blog"
+      - label: "Permalink"
+        name: "permalink"
+        widget: "hidden"
+        default: "/blog/{{slug}}/index.html"
+      - { label: "Body", name: "body", widget: "markdown" }

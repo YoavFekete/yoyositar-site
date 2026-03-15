@@ -1,0 +1,39 @@
+---
+layout: layouts/base.njk
+title: Blog
+seoTitle: Blog | YoYo Sitar
+description: Notes, stories, and updates from YoYo Sitar.
+permalink: /blog/index.html
+bodyClass: blog-index
+---
+<section class="blog-listing">
+  <div class="blog-listing-head">
+    <p class="blog-kicker">Journal</p>
+    <h1>Stories, process, and new music updates.</h1>
+    <p class="blog-intro">
+      A place for release notes, reflections from the road, and behind-the-scenes writing from YoYo Sitar.
+    </p>
+  </div>
+
+  {% if collections.blog.length %}
+    <div class="blog-card-grid">
+      {% for post in collections.blog %}
+        <article class="blog-card">
+          <p class="blog-card-date">
+            <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+          </p>
+          <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+          {% if post.data.excerpt %}
+            <p>{{ post.data.excerpt }}</p>
+          {% endif %}
+          <a class="blog-card-link" href="{{ post.url }}">Read entry</a>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <article class="blog-card blog-card-empty">
+      <h2>First post coming soon</h2>
+      <p>The blog is set up and ready. New writing will appear here as soon as it is published from the CMS.</p>
+    </article>
+  {% endif %}
+</section>
