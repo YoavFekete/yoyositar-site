@@ -1,11 +1,14 @@
-﻿---
+---
 layout: layouts/base.njk
 title: Solo Sitar
 seoTitle: Solo Sitar Show | YoYo Sitar
-description: A contemporary solo sitar concert rooted in Indian raga and live improvisation—moving from deep stillness to driving rhythm. 45–75 minutes, flexible for venues and festivals.
+description: A contemporary solo sitar concert rooted in Indian raga and live improvisation-moving from deep stillness to driving rhythm. 45-75 minutes, flexible for venues and festivals.
 permalink: /shows/solo/index.html
 videoId: uSx-PIo0wfM
-videoTitle: Raga Bageshri — late-night sitar performance by YoYo Sitar
+videoTitle: Raga Bageshri - late-night sitar performance by YoYo Sitar
+audioSrc: /assets/music/intro_ful_song.mp3
+audioKicker: Solo Sitar
+audioTitle: Full track preview
 ogImage: /assets/img/og/solo2.jpg  
 ogImageAlt: YoYo Sitar performing with bansuri player Kartikeya Vashist at an intimate baithak concert in Delhi.
 ogImageWidth: 1080
@@ -16,7 +19,7 @@ ogImageHeight: 695
 
 *An intimate solo performance rooted in Indian raga, unfolding with space, depth, and spontaneous storytelling.*
 
-A contemporary solo sitar concert rooted in **Indian raga** and **live improvisation** — a journey that moves from deep stillness to driving rhythmic intensity.
+A contemporary solo sitar concert rooted in **Indian raga** and **live improvisation** - a journey that moves from deep stillness to driving rhythmic intensity.
 
 {% include "components/video.njk" %}
 
@@ -36,8 +39,9 @@ Concert halls · Cultural centers · Festivals · Intimate venues · Private eve
 **45 / 60 / 75 minutes** (flexible)
 
 ## Technical
-Simple setup: stereo DI **or** 1–2 line inputs. Full tech rider available on request.
+Simple setup: stereo DI **or** 1-2 line inputs. Full tech rider available on request.
 
 <p class="page-cta">
   <a class="cta-button" href="/contact/">Check availability / Book</a>
 </p>
+

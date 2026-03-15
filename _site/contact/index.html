@@ -87,193 +87,555 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const toggle = document.querySelector(".nav-toggle");
-    const nav = document.querySelector("#site-nav");
-    const dropdown = document.querySelector(".nav-dropdown");
-    const dropdownButton = dropdown ? dropdown.querySelector(".nav-parent") : null;
-    const audioPlayers = document.querySelectorAll("[data-audio-player]");
+    const state = {
+      player: null,
+      button: null,
+      label: null,
+      audio: null,
+      source: null,
+      kicker: null,
+      title: null,
+      isNavigating: false,
+      youTubeApiReady: false,
+      youTubePlayers: []
+    };
 
-    if (toggle && nav) {
-      toggle.addEventListener("click", function () {
-        const isOpen = nav.classList.toggle("is-open");
-        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    function getElements() {
+      if (state.player && document.body.contains(state.player)) return state;
+
+      state.player = document.querySelector("[data-global-audio-player]");
+      state.button = state.player ? state.player.querySelector(".hero-audio-toggle") : null;
+      state.label = state.player ? state.player.querySelector(".hero-audio-label") : null;
+      state.audio = state.player ? state.player.querySelector(".hero-audio-element") : null;
+      state.source = state.audio ? state.audio.querySelector("source") : null;
+      state.kicker = state.player ? state.player.querySelector(".hero-audio-kicker") : null;
+      state.title = state.player ? state.player.querySelector(".hero-audio-title") : null;
+      return state;
+    }
+
+    function getPageAudioConfig(doc) {
+      const body = doc.body;
+      if (!body) {
+        return { audioSrc: "", audioKicker: "", audioTitle: "", audioMode: "header" };
+      }
+
+      return {
+        audioSrc: body.dataset.pageAudioSrc || "",
+        audioKicker: body.dataset.pageAudioKicker || "",
+        audioTitle: body.dataset.pageAudioTitle || "",
+        audioMode: body.dataset.pageAudioMode || "header"
+      };
+    }
+
+    function getCurrentTrack() {
+      const elements = getElements();
+      if (!elements.source) return "";
+      return elements.source.getAttribute("src") || "";
+    }
+
+    function setPlayingState(isPlaying) {
+      const elements = getElements();
+      if (!elements.player || !elements.button || !elements.label) return;
+
+      elements.player.classList.toggle("is-playing", isPlaying);
+      elements.button.setAttribute("aria-pressed", isPlaying ? "true" : "false");
+      elements.button.setAttribute("aria-label", isPlaying ? "Pause featured track" : "Play featured track");
+      elements.label.textContent = isPlaying ? "Pause" : "Listen";
+    }
+
+    function pauseGlobalAudio() {
+      const elements = getElements();
+      if (!elements.audio || elements.audio.paused) return;
+
+      elements.audio.pause();
+      setPlayingState(false);
+    }
+
+    function pauseYouTubePlayers(activeIframe) {
+      if (!state.youTubePlayers.length || !window.YT || !window.YT.PlayerState) return;
+
+      state.youTubePlayers.forEach(function (entry) {
+        if (!entry || !entry.player || !entry.iframe) return;
+        if (activeIframe && entry.iframe === activeIframe) return;
+
+        try {
+          if (typeof entry.player.getPlayerState === "function" && entry.player.getPlayerState() === window.YT.PlayerState.PLAYING) {
+            entry.player.pauseVideo();
+          }
+        } catch (error) {
+          // Ignore YouTube API timing errors.
+        }
       });
     }
 
-    if (!dropdown || !dropdownButton) return;
+    function setPlayerVisibility(isVisible) {
+      const elements = getElements();
+      if (!elements.player || !elements.button) return;
 
-    const closeDropdown = function () {
+      elements.player.classList.toggle("is-hidden", !isVisible);
+      elements.button.disabled = !isVisible;
+    }
+
+    function setPlayerMode(mode) {
+      const elements = getElements();
+      if (!elements.player) return;
+
+      const nextMode = mode === "home" ? "home" : "header";
+      elements.player.classList.toggle("hero-audio--home", nextMode === "home");
+      elements.player.classList.toggle("hero-audio--header", nextMode !== "home");
+    }
+
+    function setPlayerCopy(config) {
+      const elements = getElements();
+      if (elements.kicker) elements.kicker.textContent = config.audioKicker || "";
+      if (elements.title) elements.title.textContent = config.audioTitle || "";
+    }
+
+    function syncPlayerToConfig(config, options) {
+      const elements = getElements();
+      if (!elements.player || !elements.audio || !elements.source) return;
+
+      const settings = options || {};
+      const hadTrack = Boolean(getCurrentTrack());
+      const wasPlaying = !elements.audio.paused && !elements.audio.ended;
+      const nextTrack = config.audioSrc || "";
+
+      setPlayerMode(config.audioMode);
+
+      if (!nextTrack) {
+        if (settings.preserveExisting && hadTrack) {
+          setPlayerVisibility(true);
+          return;
+        }
+
+        elements.audio.pause();
+        elements.audio.removeAttribute("src");
+        elements.source.removeAttribute("src");
+        elements.audio.load();
+        setPlayerCopy({ audioKicker: "", audioTitle: "" });
+        setPlayerVisibility(false);
+        setPlayingState(false);
+        return;
+      }
+
+      setPlayerVisibility(true);
+      setPlayerCopy(config);
+
+      if (getCurrentTrack() === nextTrack) {
+        if (settings.forcePlay && elements.audio.paused) {
+          elements.audio.play().then(function () {
+            pauseYouTubePlayers();
+            setPlayingState(true);
+          }).catch(function () {
+            setPlayingState(false);
+          });
+        } else {
+          setPlayingState(!elements.audio.paused && !elements.audio.ended);
+        }
+        return;
+      }
+
+      elements.source.setAttribute("src", nextTrack);
+      elements.audio.load();
+
+      if (settings.forcePlay || wasPlaying) {
+        elements.audio.play().then(function () {
+          pauseYouTubePlayers();
+          setPlayingState(true);
+        }).catch(function () {
+          setPlayingState(false);
+        });
+        return;
+      }
+
+      setPlayingState(false);
+    }
+
+    function closeDropdown() {
+      const dropdown = document.querySelector(".nav-dropdown");
+      const dropdownButton = dropdown ? dropdown.querySelector(".nav-parent") : null;
+      if (!dropdown || !dropdownButton) return;
+
       dropdown.classList.remove("is-open");
       dropdownButton.setAttribute("aria-expanded", "false");
-    };
+    }
 
-    const openDropdown = function () {
-      dropdown.classList.add("is-open");
-      dropdownButton.setAttribute("aria-expanded", "true");
-    };
+    function toggleMenu() {
+      const toggle = document.querySelector(".nav-toggle");
+      const nav = document.querySelector("#site-nav");
+      if (!toggle || !nav) return;
 
-    dropdownButton.addEventListener("click", function (event) {
+      const isOpen = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    }
+
+    function toggleDropdown(event) {
+      const dropdown = event.target.closest(".nav-dropdown");
+      const button = event.target.closest(".nav-parent");
+      if (!dropdown || !button) return;
+
       const isDesktopStaticMenu = window.matchMedia("(max-width: 900px)").matches || document.body.classList.contains("home");
       if (isDesktopStaticMenu) return;
 
       event.preventDefault();
       const isOpen = dropdown.classList.contains("is-open");
-      if (isOpen) {
-        closeDropdown();
-      } else {
-        openDropdown();
+      dropdown.classList.toggle("is-open", !isOpen);
+      button.setAttribute("aria-expanded", isOpen ? "false" : "true");
+    }
+
+    function isPlainLeftClick(event) {
+      return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+    }
+
+    function shouldHandleLink(link, event) {
+      if (!link || !isPlainLeftClick(event)) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+      if (link.getAttribute("rel") === "external") return false;
+      if (link.origin !== window.location.origin) return false;
+      if (link.hash && link.pathname === window.location.pathname && link.search === window.location.search) return false;
+      return true;
+    }
+
+    function initYouTubePlayers(root) {
+      if (!state.youTubeApiReady || !window.YT || !window.YT.Player) return;
+
+      const scope = root || document;
+      const iframes = scope.querySelectorAll("iframe[data-youtube-embed]");
+
+      iframes.forEach(function (iframe) {
+        if (iframe.dataset.ytInitialized === "true") return;
+
+        iframe.dataset.ytInitialized = "true";
+        const player = new window.YT.Player(iframe, {
+          events: {
+            onStateChange: function (event) {
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                pauseGlobalAudio();
+              }
+            }
+          }
+        });
+
+        state.youTubePlayers.push({ iframe: iframe, player: player });
+      });
+    }
+
+    function loadYouTubeApi() {
+      if (!document.querySelector("iframe[data-youtube-embed]")) return;
+
+      if (window.YT && window.YT.Player) {
+        state.youTubeApiReady = true;
+        initYouTubePlayers(document);
+        return;
       }
-    });
 
-    document.addEventListener("click", function (event) {
-      if (!dropdown.contains(event.target)) {
-        closeDropdown();
-      }
-    });
+      if (document.querySelector("script[data-youtube-iframe-api]")) return;
 
-    dropdown.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") {
-        closeDropdown();
-        dropdownButton.focus();
-      }
-    });
-
-    audioPlayers.forEach(function (player) {
-      const button = player.querySelector(".hero-audio-toggle");
-      const label = player.querySelector(".hero-audio-label");
-      const audio = player.querySelector(".hero-audio-element");
-
-      if (!button || !label || !audio) return;
-
-      const setPlayingState = function (isPlaying) {
-        player.classList.toggle("is-playing", isPlaying);
-        button.setAttribute("aria-pressed", isPlaying ? "true" : "false");
-        button.setAttribute("aria-label", isPlaying ? "Pause featured intro" : "Play featured intro");
-        label.textContent = isPlaying ? "Pause" : "Listen";
+      const previousReady = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = function () {
+        state.youTubeApiReady = true;
+        if (typeof previousReady === "function") previousReady();
+        initYouTubePlayers(document);
       };
 
-      button.addEventListener("click", function () {
-        if (audio.paused) {
-          audioPlayers.forEach(function (otherPlayer) {
-            if (otherPlayer === player) return;
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      script.async = true;
+      script.dataset.youtubeIframeApi = "true";
+      document.head.appendChild(script);
+    }
 
-            const otherAudio = otherPlayer.querySelector(".hero-audio-element");
-            const otherButton = otherPlayer.querySelector(".hero-audio-toggle");
-            const otherLabel = otherPlayer.querySelector(".hero-audio-label");
+    function syncHead(nextDoc) {
+      document.title = nextDoc.title;
 
-            if (otherAudio) otherAudio.pause();
-            otherPlayer.classList.remove("is-playing");
-            if (otherButton) {
-              otherButton.setAttribute("aria-pressed", "false");
-              otherButton.setAttribute("aria-label", "Play featured intro");
-            }
-            if (otherLabel) otherLabel.textContent = "Listen";
-          });
+      const selectors = [
+        'meta[name="description"]',
+        'link[rel="canonical"]',
+        'meta[property="og:title"]',
+        'meta[property="og:description"]',
+        'meta[property="og:url"]',
+        'meta[property="og:image"]',
+        'meta[property="og:image:secure_url"]',
+        'meta[property="og:image:alt"]',
+        'meta[property="og:image:width"]',
+        'meta[property="og:image:height"]',
+        'meta[name="twitter:title"]',
+        'meta[name="twitter:description"]',
+        'meta[name="twitter:image"]',
+        'meta[name="twitter:image:alt"]'
+      ];
 
-          audio.play();
-          setPlayingState(true);
-        } else {
-          audio.pause();
-          setPlayingState(false);
+      selectors.forEach(function (selector) {
+        const currentNode = document.head.querySelector(selector);
+        const nextNode = nextDoc.head.querySelector(selector);
+
+        if (currentNode && nextNode) {
+          currentNode.replaceWith(nextNode.cloneNode(true));
+        } else if (currentNode && !nextNode) {
+          currentNode.remove();
+        } else if (!currentNode && nextNode) {
+          document.head.appendChild(nextNode.cloneNode(true));
         }
       });
+    }
 
-      audio.addEventListener("ended", function () {
-        audio.currentTime = 0;
+    function syncBodyAttributes(nextBody) {
+      document.body.className = nextBody.className || "";
+
+      ["pageAudioSrc", "pageAudioKicker", "pageAudioTitle", "pageAudioMode"].forEach(function (key) {
+        if (nextBody.dataset[key]) {
+          document.body.dataset[key] = nextBody.dataset[key];
+        } else {
+          delete document.body.dataset[key];
+        }
+      });
+    }
+
+    async function navigateTo(url, options) {
+      if (state.isNavigating) return;
+      state.isNavigating = true;
+
+      const settings = options || {};
+
+      try {
+        const response = await fetch(url, {
+          headers: {
+            "X-Requested-With": "global-audio-player"
+          }
+        });
+
+        if (!response.ok) throw new Error("Navigation failed");
+
+        const html = await response.text();
+        const nextDoc = new DOMParser().parseFromString(html, "text/html");
+        const nextMain = nextDoc.querySelector("main.page");
+        const currentMain = document.querySelector("main.page");
+        const nextChrome = nextDoc.querySelector("[data-site-chrome]");
+        const currentChrome = document.querySelector("[data-site-chrome]");
+
+        if (!nextMain || !currentMain || !nextChrome || !currentChrome || !nextDoc.body) {
+          throw new Error("Incomplete page shell");
+        }
+
+        currentMain.innerHTML = nextMain.innerHTML;
+        currentChrome.innerHTML = nextChrome.innerHTML;
+
+        syncHead(nextDoc);
+        syncBodyAttributes(nextDoc.body);
+        syncPlayerToConfig(getPageAudioConfig(nextDoc), { preserveExisting: true });
+        loadYouTubeApi();
+        initYouTubePlayers(document);
+        closeDropdown();
+
+        if (!settings.fromPopState) {
+          window.history.pushState({}, "", url);
+        }
+
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      } catch (error) {
+        window.location.href = url;
+      } finally {
+        state.isNavigating = false;
+      }
+    }
+
+    document.addEventListener("click", function (event) {
+      if (event.target.closest(".nav-toggle")) {
+        event.preventDefault();
+        toggleMenu();
+        return;
+      }
+
+      if (event.target.closest(".nav-parent")) {
+        toggleDropdown(event);
+        return;
+      }
+
+      const audioButton = event.target.closest(".hero-audio-toggle");
+      if (audioButton) {
+        event.preventDefault();
+        const elements = getElements();
+        if (!elements.audio || !getCurrentTrack()) return;
+
+        if (elements.audio.paused) {
+          elements.audio.play().then(function () {
+            pauseYouTubePlayers();
+            setPlayingState(true);
+          }).catch(function () {
+            setPlayingState(false);
+          });
+        } else {
+          elements.audio.pause();
+          setPlayingState(false);
+        }
+        return;
+      }
+
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) {
+        const dropdown = document.querySelector(".nav-dropdown");
+        if (dropdown && !dropdown.contains(event.target)) {
+          closeDropdown();
+        }
+        return;
+      }
+
+      event.preventDefault();
+      navigateTo(link.href);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeDropdown();
+      }
+    });
+
+    window.addEventListener("popstate", function () {
+      navigateTo(window.location.href, { fromPopState: true });
+    });
+
+    const elements = getElements();
+    if (elements.audio) {
+      elements.audio.addEventListener("ended", function () {
+        elements.audio.currentTime = 0;
         setPlayingState(false);
       });
 
-      audio.addEventListener("pause", function () {
-        if (!audio.ended) {
+      elements.audio.addEventListener("pause", function () {
+        if (!elements.audio.ended) {
           setPlayingState(false);
         }
       });
-    });
+
+      elements.audio.addEventListener("play", function () {
+        pauseYouTubePlayers();
+        setPlayingState(true);
+      });
+    }
+
+    loadYouTubeApi();
+    syncPlayerToConfig(getPageAudioConfig(document), { preserveExisting: false });
+    initYouTubePlayers(document);
   });
 </script>
 
-<body class="contact">
-  ﻿<header class="header">
-  <div class="nav-shell">
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="site-nav"
-      aria-label="Open menu"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+<body
+  class="contact"
+  data-page-audio-src=""
+  data-page-audio-kicker=""
+  data-page-audio-title=""
+  data-page-audio-mode="header"
+>
+  <header class="header">
+  <div class="header-chrome" data-site-chrome>
+    <div class="nav-shell">
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="Open menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-    <nav class="nav" id="site-nav">
-      <a href="/music/"
-         >
-         Music
-      </a>
+      <nav class="nav" id="site-nav">
+        <a href="/music/"
+           >
+           Music
+        </a>
 
-      <div class="nav-dropdown">
-        <button
-          class="nav-parent"
-          type="button"
-          aria-expanded="false"
-          aria-controls="shows-menu"
-        >
-          Live Shows
-        </button>
+        <div class="nav-dropdown">
+          <button
+            class="nav-parent"
+            type="button"
+            aria-expanded="false"
+            aria-controls="shows-menu"
+          >
+            Live Shows
+          </button>
 
 
-        <div class="nav-dropdown-menu" id="shows-menu">
-          
-            <a href="/shows/solo/"
-               class="nav-sub"
-               >
-               YoYo Sitar Solo
-            </a>
-          
-            <a href="/shows/afro-raga/"
-               class="nav-sub"
-               >
-               Afro-Raga
-            </a>
-          
-            <a href="/shows/raga-voice/"
-               class="nav-sub"
-               >
-               Raga Voice
-            </a>
-          
-            <a href="/shows/sound-journey/"
-               class="nav-sub"
-               >
-               Sound Journey
-            </a>
-          
+          <div class="nav-dropdown-menu" id="shows-menu">
+            
+              <a href="/shows/solo/"
+                 class="nav-sub"
+                 >
+                 YoYo Sitar Solo
+              </a>
+            
+              <a href="/shows/afro-raga/"
+                 class="nav-sub"
+                 >
+                 Afro-Raga
+              </a>
+            
+              <a href="/shows/raga-voice/"
+                 class="nav-sub"
+                 >
+                 Raga Voice
+              </a>
+            
+              <a href="/shows/sound-journey/"
+                 class="nav-sub"
+                 >
+                 Sound Journey
+              </a>
+            
+          </div>
         </div>
-      </div>
 
-      <a href="/about/"
-         >
-         About
-      </a>
+        <a href="/about/"
+           >
+           About
+        </a>
 
-      <a href="/contact/"
-         aria-current="page">
-         Contact
-      </a>
+        <a href="/contact/"
+           aria-current="page">
+           Contact
+        </a>
 
-      <a href="/presskit/"
-         >
-         Press Kit
-      </a>
-    </nav>
+        <a href="/presskit/"
+           >
+           Press Kit
+        </a>
+      </nav>
+    </div>
+
+    
+
+
+<div class="hero-audio hero-audio--header is-hidden" data-audio-player data-global-audio-player>
+  <button
+    class="hero-audio-toggle"
+    type="button"
+    aria-pressed="false"
+    aria-label="Play featured track"
+    disabled
+  >
+    <span class="hero-audio-icon" aria-hidden="true"></span>
+    <span class="hero-audio-label">Listen</span>
+  </button>
+
+  <div class="hero-audio-copy">
+    <p class="hero-audio-kicker"></p>
+    <p class="hero-audio-title"></p>
   </div>
 
-  <a class="site-logo" href="/" aria-label="YoYo Sitar — Home">
-    <img src="/assets/img/logo-black5.png" alt="YoYo Sitar" width="1024" height="1024" />
-  </a>
+  <audio class="hero-audio-element" preload="none">
+    <source src="" type="audio/mpeg" />
+  </audio>
+</div>
+
+
+    <a class="site-logo" href="/" aria-label="YoYo Sitar - Home">
+      <img src="/assets/img/logo-black5.png" alt="YoYo Sitar" width="1024" height="1024" />
+    </a>
+  </div>
 </header>
 
   <main class="page">
@@ -296,7 +658,7 @@
 
 
   <p hidden>
-    <label>Don’t fill this out: <input name="bot-field" /></label>
+    <label>Don't fill this out: <input name="bot-field" /></label>
   </p>
 
   <p>
@@ -315,6 +677,7 @@
     <button type="submit">Send</button>
   </p>
 </form>
+
   </main>
   ﻿
 
@@ -342,3 +705,6 @@
 
 </body>
 </html>
+
+
+

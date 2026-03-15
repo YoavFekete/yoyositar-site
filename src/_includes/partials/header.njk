@@ -1,63 +1,67 @@
-﻿<header class="header">
-  <div class="nav-shell">
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="site-nav"
-      aria-label="Open menu"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+<header class="header">
+  <div class="header-chrome" data-site-chrome>
+    <div class="nav-shell">
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="Open menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-    <nav class="nav" id="site-nav">
-      <a href="/music/"
-         {% if page.url == '/music/' %}aria-current="page"{% endif %}>
-         Music
-      </a>
+      <nav class="nav" id="site-nav">
+        <a href="/music/"
+           {% if page.url == '/music/' %}aria-current="page"{% endif %}>
+           Music
+        </a>
 
-      <div class="nav-dropdown{% for s in shows %}{% if page.url == s.url %} is-current{% endif %}{% endfor %}">
-        <button
-          class="nav-parent"
-          type="button"
-          aria-expanded="false"
-          aria-controls="shows-menu"
-        >
-          Live Shows
-        </button>
+        <div class="nav-dropdown{% for s in shows %}{% if page.url == s.url %} is-current{% endif %}{% endfor %}">
+          <button
+            class="nav-parent"
+            type="button"
+            aria-expanded="false"
+            aria-controls="shows-menu"
+          >
+            Live Shows
+          </button>
 
 
-        <div class="nav-dropdown-menu" id="shows-menu">
-          {% for s in shows %}
-            <a href="{{ s.url }}"
-               class="nav-sub"
-               {% if page.url == s.url %}aria-current="page"{% endif %}>
-               {{ s.title }}
-            </a>
-          {% endfor %}
+          <div class="nav-dropdown-menu" id="shows-menu">
+            {% for s in shows %}
+              <a href="{{ s.url }}"
+                 class="nav-sub"
+                 {% if page.url == s.url %}aria-current="page"{% endif %}>
+                 {{ s.title }}
+              </a>
+            {% endfor %}
+          </div>
         </div>
-      </div>
 
-      <a href="/about/"
-         {% if page.url == '/about/' %}aria-current="page"{% endif %}>
-         About
-      </a>
+        <a href="/about/"
+           {% if page.url == '/about/' %}aria-current="page"{% endif %}>
+           About
+        </a>
 
-      <a href="/contact/"
-         {% if page.url == '/contact/' %}aria-current="page"{% endif %}>
-         Contact
-      </a>
+        <a href="/contact/"
+           {% if page.url == '/contact/' %}aria-current="page"{% endif %}>
+           Contact
+        </a>
 
-      <a href="/presskit/"
-         {% if page.url == '/presskit/' %}aria-current="page"{% endif %}>
-         Press Kit
-      </a>
-    </nav>
+        <a href="/presskit/"
+           {% if page.url == '/presskit/' %}aria-current="page"{% endif %}>
+           Press Kit
+        </a>
+      </nav>
+    </div>
+
+    {% include "partials/global-audio-player.njk" %}
+
+    <a class="site-logo" href="/" aria-label="YoYo Sitar - Home">
+      <img src="/assets/img/logo-black5.png" alt="YoYo Sitar" width="1024" height="1024" />
+    </a>
   </div>
-
-  <a class="site-logo" href="/" aria-label="YoYo Sitar — Home">
-    <img src="/assets/img/logo-black5.png" alt="YoYo Sitar" width="1024" height="1024" />
-  </a>
 </header>

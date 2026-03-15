@@ -1,0 +1,26 @@
+{% set hasAudioTrack = audioSrc | default('') %}
+{% set audioPlayerClass = "hero-audio hero-audio--header" %}
+{% if page.url == "/" %}
+  {% set audioPlayerClass = "hero-audio hero-audio--home" %}
+{% endif %}
+<div class="{{ audioPlayerClass }}{% if not hasAudioTrack %} is-hidden{% endif %}" data-audio-player data-global-audio-player>
+  <button
+    class="hero-audio-toggle"
+    type="button"
+    aria-pressed="false"
+    aria-label="Play featured track"
+    {% if not hasAudioTrack %}disabled{% endif %}
+  >
+    <span class="hero-audio-icon" aria-hidden="true"></span>
+    <span class="hero-audio-label">Listen</span>
+  </button>
+
+  <div class="hero-audio-copy">
+    <p class="hero-audio-kicker">{{ audioKicker | default('') }}</p>
+    <p class="hero-audio-title">{{ audioTitle | default('') }}</p>
+  </div>
+
+  <audio class="hero-audio-element" preload="none">
+    <source src="{{ audioSrc | default('') }}" type="audio/mpeg" />
+  </audio>
+</div>

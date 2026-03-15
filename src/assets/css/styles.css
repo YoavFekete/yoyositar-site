@@ -1,4 +1,4 @@
-﻿/* ========================================
+/* ========================================
    YOYO SITAR — BRAND CSS
    Fonts used in base.njk:
    Cinzel + Inter
@@ -1910,3 +1910,326 @@ body.contact form button:hover{
     line-height: 1.75;
   }
 }
+
+/* =========================
+   Global Audio Player Text Fix
+========================= */
+.hero-audio-copy{
+  gap: 4px;
+  transform: none;
+  margin-top: 8px;
+}
+
+.hero-audio-kicker{
+  font-size: 11px;
+  line-height: 1.1;
+  letter-spacing: 0.12em;
+  transform: none;
+}
+
+.hero-audio-title{
+  max-width: 26ch;
+  font-size: 11px;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+body:not(.home) .hero-audio-copy{
+  align-items: flex-start;
+  text-align: left;
+}
+
+@media (max-width: 600px){
+  .hero-audio-copy{
+    gap: 3px;
+    transform: none;
+    margin-top: 6px;
+  }
+
+  .hero-audio-kicker{
+    font-size: 10px;
+    line-height: 1.05;
+    transform: none;
+  }
+
+  .hero-audio-title{
+    max-width: 22ch;
+    font-size: 10px;
+    line-height: 1.15;
+  }
+}
+
+/* =========================
+   Global Audio Player Position Fix
+========================= */
+body:not(.home) .hero-audio{
+  top: 28px;
+  left: 200px;
+  right: auto;
+  transform: none;
+  margin-top: 0;
+}
+
+@media (max-width: 600px){
+  body:not(.home) .hero-audio{
+    top: 16px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    margin-top: 0;
+  }
+}
+
+/* =========================
+   Global Audio Player Copy Visibility
+========================= */
+body:not(.home) .hero-audio-copy{
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 0s linear 180ms;
+}
+
+body:not(.home) .hero-audio:hover .hero-audio-copy,
+body:not(.home) .hero-audio:focus-within .hero-audio-copy{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 0s linear 0s;
+}
+
+/* =========================
+   Global Audio Player Position Tweak
+========================= */
+body:not(.home) .hero-audio{
+  left: 300px;
+}
+
+@media (max-width: 600px){
+  body.home .hero-audio{
+    top: calc(57% - 100px);
+  }
+}
+
+/* =========================
+   Global Audio Player Desktop-Only Position Fix
+========================= */
+@media (min-width: 601px){
+  body:not(.home) .hero-audio{
+    left: 300px;
+    right: auto;
+    top: 28px;
+    transform: none;
+  }
+}
+
+@media (max-width: 600px){
+  body:not(.home) .hero-audio{
+    left: 50%;
+    right: auto;
+    top: 16px;
+    transform: translateX(-50%);
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Desktop Top Fix
+========================= */
+@media (min-width: 601px){
+  body:not(.home) .hero-audio{
+    top: 28px !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Desktop Left Fix
+========================= */
+@media (min-width: 601px){
+  body:not(.home) .hero-audio{
+    left: 300px !important;
+    right: auto !important;
+    transform: none !important;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Desktop Right Fix
+========================= */
+@media (min-width: 601px){
+  body:not(.home) .hero-audio{
+    left: auto !important;
+    right: 300px !important;
+    top: 28px !important;
+    transform: none !important;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Desktop Right Offset Fix
+========================= */
+@media (min-width: 601px){
+  body:not(.home) .hero-audio{
+    right: 200px !important;
+  }
+}
+
+
+
+/* =========================
+   Global Audio Player Non-Home Mobile Header Row
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .header{
+    padding-right: 24px;
+  }
+
+  body:not(.home) .header-chrome{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    width: 100%;
+    column-gap: 10px;
+  }
+
+  body:not(.home) .nav-shell{
+    width: auto;
+    max-width: none;
+  }
+
+  body:not(.home) .hero-audio{
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto !important;
+    padding: 0;
+    justify-self: center;
+    align-items: center;
+    z-index: 1;
+  }
+
+  body:not(.home) .site-logo{
+    position: static;
+    justify-self: end;
+  }
+
+  body:not(.home) .site-logo img{
+    width: 122px;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Mobile Header Gap Fix
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .header-chrome{
+    column-gap: 0;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Mobile Header Cell Alignment
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .header-chrome{
+    align-items: center;
+  }
+
+  body:not(.home) .nav-shell,
+  body:not(.home) .hero-audio,
+  body:not(.home) .site-logo{
+    align-self: center;
+    justify-self: center;
+  }
+
+  body:not(.home) .nav-shell{
+    justify-self: start;
+  }
+
+  body:not(.home) .site-logo{
+    justify-self: end;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Mobile Nudge
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .hero-audio{
+    position: relative;
+    top: 30px;
+    left: -10px;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Mobile Nudge Update
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .hero-audio{
+    top: 100px;
+    left: -10px;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Mobile Margin Nudge
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .hero-audio{
+    position: static !important;
+    margin-top: 100px !important;
+    margin-left: -10px !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Mobile Final Nudge
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .hero-audio{
+    margin-top: 50px !important;
+    margin-left: -30px !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Mobile Horizontal Fix
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .hero-audio{
+    margin-left: 30px !important;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Mobile Left Offset Update
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .hero-audio{
+    margin-left: -100px !important;
+  }
+}
+
+/* =========================
+   Global Audio Player Non-Home Mobile Left Offset Final Update
+========================= */
+@media (max-width: 600px){
+  body:not(.home) .hero-audio{
+    margin-left: -80px !important;
+  }
+}pp
